@@ -8,8 +8,10 @@ console.log(count); // sẽ in ra 1
 // đối với const giá trị không thể thay đổi được
 // Ví dụ
 const maxCount = 10;
-// maxCount = 20; // sẽ báo lỗi vì không thể gán giá trị mới cho biến const
-console.log(maxCount); // sẽ in ra 10
+
+// maxCount = 20;
+console.log(maxCount); // Lỗi: không thể gán lại giá trị cho const
+
 
 // Đối với object hoặc Array, nếu là const thì không thể gán lại object mới nhưng có thể thay đổi thuộc tính của object đó
 const user = { name: "Duc", age: 23 };

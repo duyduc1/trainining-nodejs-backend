@@ -10,7 +10,7 @@ console.log("-------------------");
 
 // forEach sẽ duyệt từng phần tử bên trong mảng nhưng sẽ không trả về mãng mới
 const arr1 = [1, 2, 3];
-arr1.forEach(num => console.log(num * 2));
+arr1.forEach(num => console.log(num *  2));
 // Output: 2, 4, 6
 
 console.log("-------------------");
