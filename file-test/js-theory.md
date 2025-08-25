@@ -239,16 +239,16 @@ let date = new Date();
 // 5. RegExp: Biểu thức chính quy
 let regex = /abc/;
 
-// 6. Map: Bản đồ
+// 6. Map
 let map = new Map();
 
-// 7. Set: Tập hợp
+// 7. Set
 let set = new Set();
 
-// 8. WeakMap: Bản đồ yếu
+// 8. WeakMap: chỉ chứa các object, không chứa primitive value
 let weakMap = new WeakMap();
 
-// 9. WeakSet: Tập hợp yếu
+// 9. WeakSet: chứa các object (không chứa giá trị nguyên thủy)
 let weakSet = new WeakSet();
 ```
 

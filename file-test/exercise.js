@@ -13,8 +13,10 @@ function addStudent(student) {
 
 // 2. Tính điểm trung bình
 function calculateAverage() {
-  students.forEach(s => s.avg = (s.math + s.english) / 2);
-  return students.map(s => ({ name: s.name, avg: s.avg }));
+  return students.map(s => {
+    s.avg = (s.math + s.english) / 2;
+    return { name: s.name, avg: s.avg };
+  });
 }
 
 // 3. Lọc học sinh có điểm trung bình >= 8
@@ -31,21 +33,27 @@ function countGender() {
 
 // 5. Học sinh có điểm toán cao nhất
 function topMathStudent() {
-  const maxMath = Math.max(...students.map(s => s.math));
-  return students.find(s => s.math === maxMath);
+  return students.reduce((top, s) => {
+    return (!top || s.math > top.math) ? s : top;
+  }, null);
 }
 
 // 6. Nhóm học sinh Pass/Fail
 function groupPassFail() {
-  const pass = students.filter(s => s.avg >= 5);
-  const fail = students.filter(s => s.avg < 5);
+  const pass = [];
+  const fail = [];
+  students.forEach(s => {
+    if (s.avg >= 5) pass.push(s);
+    else fail.push(s);
+  });
   return { pass, fail };
 }
 
 // 7. Học sinh giỏi nhất môn tiếng Anh
 function topEnglishStudent() {
-  const maxEnglish = Math.max(...students.map(s => s.english));
-  return students.find(s => s.english === maxEnglish);
+  return students.reduce((top, s) => {
+    return (!top || s.english > top.english) ? s : top;
+  }, null);
 }
 
 // 8. Danh sách tên viết in hoa
@@ -72,20 +80,25 @@ function allFemaleAbove6() {
 
 // 12. Gom nhóm học sinh theo giới tính
 function groupByGender() {
-  const male = students.filter(s => s.gender === "male");
-  const female = students.filter(s => s.gender === "female");
-  return { male, female };
+  return students.reduce((acc, s) => {
+    if (s.gender === "male") acc.male.push(s);
+    else if (s.gender === "female") acc.female.push(s);
+    return acc;
+  }, { male: [], female: [] });
 }
 
 // 13. Học sinh có tổng điểm cao nhất
 function topTotalScoreStudent() {
-  const maxTotal = Math.max(...students.map(s => s.math + s.english));
-  return students.find(s => s.math + s.english === maxTotal);
+  return students.reduce((top, s) => {
+    const total = s.math + s.english;
+    const topTotal = top ? top.math + top.english : 0;
+    return total > topTotal ? s : top;
+  }, null);
 }
 
 // 14. Học sinh có tên bắt đầu bằng chữ 'A'
 function studentsStartingWithA() {
-  return students.filter(s => s.name.startsWith("A"));
+  return students.filter(s => s.name.toLowerCase().startsWith("a"));
 }
 
 // 15. Mảng tên học sinh và điểm trung bình
@@ -95,11 +108,13 @@ function namesAndAverages() {
 
 // 16. Đếm học sinh theo phân loại học lực
 function countByClassification() {
-  const excellent = students.filter(s => s.avg >= 8).length;
-  const good = students.filter(s => s.avg >= 6.5 && s.avg < 8).length;
-  const average = students.filter(s => s.avg >= 5 && s.avg < 6.5).length;
-  const poor = students.filter(s => s.avg < 5).length;
-  return { excellent, good, average, poor };
+  return students.reduce((acc, s) => {
+    if (s.avg >= 8) acc.excellent++;
+    else if (s.avg >= 6.5) acc.good++;
+    else if (s.avg >= 5) acc.average++;
+    else acc.poor++;
+    return acc;
+  }, { excellent: 0, good: 0, average: 0, poor: 0 });
 }
 
 // --- Ví dụ sử dụng ---
